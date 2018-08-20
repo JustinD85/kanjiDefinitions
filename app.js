@@ -6,6 +6,7 @@ let kanji2Learn = {
 	correctKanji: 0,
 	correctDefinition: 0
 
+
 }
 
 
