@@ -1,12 +1,13 @@
 body {
 	background-color: lightblue;
+	min-height: 100%;
 }
 
 .kanji {
 	background-color: orange;
 	text-align: center;
 	}
-	
+
 .definition {
 	background-color: yellow;
 	margin: auto;
@@ -21,4 +22,15 @@ body {
 	bottom: 10%;
 	width: 60%;
 	height: 30%;
+}
+.container {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+input {
+	position: relative;
+	display: block;
+	margin: 0 auto;
 }
