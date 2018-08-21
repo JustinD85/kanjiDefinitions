@@ -1,11 +1,22 @@
-body {
-	background-color: lightblue;
-	min-height: 100%;
+html {
+	height: 100%;
 }
-
+body {
+	display: block;
+	background-color: lightblue;
+	height: 100%;
+}
+.container {
+	height: 100%;
+	width: 100%;
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
 .kanji {
 	background-color: orange;
 	text-align: center;
+	font-size: 12rem;
 	}
 
 .definition {
@@ -16,19 +27,11 @@ body {
 
 .canvas {
 	background-color: beige;
-	position: absolute;
-	left: 20%;
-	right: 20%;
-	bottom: 10%;
+	position: relative;
 	width: 60%;
 	height: 30%;
 }
-.container {
-	position: relative;
-	display: block;
-	margin: 0 auto;
-	text-align: center;
-}
+
 input {
 	position: relative;
 	display: block;
