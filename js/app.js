@@ -2,7 +2,7 @@
 
 
 let verified = false;
-let isProcessing = false;
+let isProcessingLogin = false;
 
 const container = document.querySelector('.container');
 const person = {
@@ -13,7 +13,7 @@ const person = {
 	correctKanji: 0,
 	correctDefinition: 0	
 }
-//grabs localContent and converts from string to obj(or w/e it was before)
+//grabs localContent and converts from string to obj(or watever it was before)
 const accounts = [JSON.parse(localStorage.getItem('accounts'))] || [];
 
 //functions
@@ -27,14 +27,14 @@ const elementMaker = (ele, text, optionalClass) => {
 	return container.querySelector("." + optionalClass);
 }
 //checks accounts for username
-const checkValueInObj = (k) => {
-	for(let e of accounts){
-		for(let j in e){
-			if(e[j] === k){
+const checkValueInObj = async (valueToCheck) => {
+	accounts.map((eachObj) => {
+		Object.keys(eachObj).map(objKey => {
+			if(eachObj[objKey] === valueToCheck){
 				return true;
 			}
-		}
-	}
+		})
+	})
 	return false;
 }
 
@@ -42,12 +42,12 @@ const checkValueInObj = (k) => {
 const loginProcessor = (e) => {
 	var key = e.keyCode;
 	if(key === 13){
-		if(!isProcessing &&  checkValueInObj(inputBox.value)){
-			isProcessing = true;
+		if(!isProcessingLogin &&  checkValueInObj(inputBox.value)){
+			isProcessingLogin = true;
 			textBox.textContent = "What is your passcode?"
 			inputBox.value = ""
 		}
-		else if(isProcessing && inputBox.value === person.passcode){
+		else if(isProcessingLogin && checkValueInObj(inputBox.value)){
 			verified = true;			
 			inputBox.removeEventListener('keypress', loginProcessor);
 			inputBox.value = "";
@@ -55,6 +55,7 @@ const loginProcessor = (e) => {
 		}
 		else
 		{
+			//add some logic to create new person in localstorage
 			inputBox.value = "";
 		}
 	}
@@ -81,11 +82,6 @@ if(verified){
 	elementMaker("div", person.kanji, "kanji");
 	elementMaker("div", person.definition, "definition");
 	elementMaker("canvas", undefined, "canvas");
-	
-	// container.innerHTML = `<div class="kanji"></div>
-	// <div class="definition"></div>`;
-// create canvas for drawing
-// document.write(`<canvas class="canvas">canvas for drawing </canvas>`);
 }
 // show a definition
 
