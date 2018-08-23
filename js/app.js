@@ -27,14 +27,14 @@ const elementMaker = (ele, text, optionalClass) => {
 	return container.querySelector("." + optionalClass);
 }
 //checks accounts for username
-const checkValueInObj = async (valueToCheck) => {
-	accounts.map((eachObj) => {
-		Object.keys(eachObj).map(objKey => {
-			if(eachObj[objKey] === valueToCheck){
+const checkValueInObj = (valueToCheck) => {
+	for(let accountToCheck of accounts){
+		for(let key in accountToCheck){
+			if(accountToCheck[key] === valueToCheck){
 				return true;
 			}
-		})
-	})
+		}
+	}
 	return false;
 }
 
@@ -42,6 +42,13 @@ const checkValueInObj = async (valueToCheck) => {
 const loginProcessor = (e) => {
 	var key = e.keyCode;
 	if(key === 13){
+		//check if new user
+		if(!isProcessingLogin && !checkValueInObj(inputBox.value)){
+			textBox.textContent = "Are you are new user?"
+			if(inputBox.value === "yes".toLowerCase()){
+				accounts.push(new person()
+			}
+		}
 		if(!isProcessingLogin &&  checkValueInObj(inputBox.value)){
 			isProcessingLogin = true;
 			textBox.textContent = "What is your passcode?"
@@ -55,7 +62,6 @@ const loginProcessor = (e) => {
 		}
 		else
 		{
-			//add some logic to create new person in localstorage
 			inputBox.value = "";
 		}
 	}
@@ -82,6 +88,11 @@ if(verified){
 	elementMaker("div", person.kanji, "kanji");
 	elementMaker("div", person.definition, "definition");
 	elementMaker("canvas", undefined, "canvas");
+	
+	// container.innerHTML = `<div class="kanji"></div>
+	// <div class="definition"></div>`;
+// create canvas for drawing
+// document.write(`<canvas class="canvas">canvas for drawing </canvas>`);
 }
 // show a definition
 
